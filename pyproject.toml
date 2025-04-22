@@ -1,27 +1,27 @@
-# [build-system]
-# requires = ["flit_core >=3.2,<4"]
-# build-backend = "flit_core.buildapi"
+[build-system]
+requires = ["flit_core >=3.2,<4"]
+build-backend = "flit_core.buildapi"
 
-# [project]
-# name = "battery_tester"
-# authors = [{name = "OutdoorRob", email = "githubrob@online.de"}]
-# classifiers = [
-#     "License :: OSI Approved :: MIT License",
-#     "Programming Language :: Python",
-#     "Programming Language :: Python :: 3.12",
-# ]
-# requires-python=">=3.12"
-# dynamic = ["version", "description"]
-# dependencies = [
-#     "tinkerforge==2.1.31",
-# ]
+[project]
+name = "battery_tester"
+authors = [{name = "OutdoorRob", email = "githubrob@online.de"}]
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3.12",
+]
+requires-python=">=3.12"
+dynamic = ["version", "description"]
+dependencies = [
+    "tinkerforge==2.1.31",
+]
 
-# [project.optional-dependencies]
-# test = [
-#     "pytest",
-#     "coverage",
-#     "pytest-cov",
-# ]
+[project.optional-dependencies]
+test = [
+    "tox",
+    "pytest",
+    "pytest-cov",
+]
 
-# [project.urls]
-# Home = "https://github.com/OutdoorRob/battery_tester"
+[project.urls]
+Home = "https://github.com/OutdoorRob/battery_tester"

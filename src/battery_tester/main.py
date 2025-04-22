@@ -1,11 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-""" docstring main
-    ...
-"""
-
 from datetime import datetime
+
+import battery_tester
 
 import db_sqlite
 import tf_connection
@@ -15,20 +13,6 @@ from testrun import TestRun
 
 import logging
 
-
-__version__ = "0.0.2"
-
-""" # TODO
-    - DB Klasse umbauen
-        - maximal connection global aber nicht den Cursor
-        - prüfen ob dann 'check_same_thread=False' noch nötig ist
-    - Live Anzeige Entladekurve
-    - Export der Messwerte als CSV (+ automatisch nach jedem fertigen Messdurchlauf)
-    - Berechnung der Kapazität + Anzeige -> done
-        - eigener Algorithmus -> done
-        - mit Numpy Integral
-    - Log-Boschaften überarbeiten (Prozess-Nr. nach vorn, variable Nachricht als letztes)
-"""
 
 """ Learnings
     - working with modules threading, sqlite3, tkinter
@@ -112,7 +96,7 @@ def cmd_start_test_run_cyclic():
         TestRun(
             database,
             gui.battery_id,
-            __version__,
+            battery_tester.__version__,
         )
     )
 
@@ -145,7 +129,7 @@ def schedule_test_run(time_ms: int, test_run: TestRun):
 def main():
     global gui, database, tinkerforge
 
-    gui = TkinterGUI(__version__)
+    gui = TkinterGUI(battery_tester.__version__)
 
     database = db_sqlite.DBSQLite("out/battery_tester.db")
     #tinkerforge = tf_connection.TFIPConnection()
