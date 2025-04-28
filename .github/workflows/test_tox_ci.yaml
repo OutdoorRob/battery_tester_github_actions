@@ -32,4 +32,4 @@ jobs:
           pip install tox
       - name: Run tox (tox handles all the testing like run locally)
         run: |
-          tox -e py
+          tox
