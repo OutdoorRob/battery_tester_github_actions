@@ -1,0 +1,35 @@
+# This workflow will install Python and run tox. tox handles all the testing like run locally.
+
+name: test tox CI
+
+on:
+  push:
+    branches: ["feature/unit_tests"]
+  pull_request:
+    branches: ["feature/unit_tests"]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        python: ["3.12"]
+    
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install Tox and any other packages
+        run: |
+          python -m pip install --upgrade pip
+          pip install tox
+      - name: Run tox (tox handles all the testing like run locally)
+        run: |
+          tox -e py
