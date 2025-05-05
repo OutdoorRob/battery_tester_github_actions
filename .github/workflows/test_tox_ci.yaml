@@ -13,7 +13,7 @@ permissions:
   contents: read # access to check out code and install dependencies
 
 jobs:
-  continuous_integration:
+  pytest:
     runs-on: ${{ matrix.os }}
     
     strategy:
@@ -38,4 +38,48 @@ jobs:
       
       - name: Run tox for pytest
         run: |
-          tox -e py
+          tox -e pytest
+
+  lint_with_ruff:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install tox
+      
+      - name: Run tox for lint
+        run: |
+          tox -e lint
+
+  typecheck_with_mypy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install tox
+      
+      - name: Run tox for type
+        run: |
+          tox -e type
