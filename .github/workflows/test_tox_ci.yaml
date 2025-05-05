@@ -38,7 +38,7 @@ jobs:
       
       - name: Run tox for pytest
         run: |
-          tox -e pytest
+          tox -e py
 
   lint_with_ruff:
     runs-on: ubuntu-latest
